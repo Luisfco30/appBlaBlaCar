@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:triggers="clr-namespace:AppBlaBlaCar.Triggers"
+             x:Class="AppBlaBlaCar.Views.RideDetailView"
+             Title="Detalle del Viaje">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Eliminar" Command="{Binding DeleteCommand}"/>
+        <ToolbarItem Text="Guardar"  Command="{Binding SaveCommand}"/>
+        <ToolbarItem Text="Mapa" Command="{Binding MapCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout Margin="15">
+            <Label Text="INFORMACIÓN DE LA RUTA" XAlign="Center" FontSize="Large" FontAttributes="Bold"/>
+            <Entry 
+                x:Name="txtOrigen"
+                Placeholder="Origen" 
+                IsEnabled="{Binding visible}"
+                Text="{Binding OriginName}"/>
+            <Label Text="Coordenadas" XAlign="Start" FontSize="Micro"/>
+            <Entry 
+                x:Name="txtOrigenLat"
+                Placeholder="Latitud" 
+                IsEnabled="{Binding visible}"
+                Text="{Binding LatitudeOrg}"/>
+            <Entry 
+                x:Name="txtOrigenAlt"
+                Placeholder="Longitud"              
+                IsEnabled="{Binding visible}"
+                Text="{Binding LongitudeOrg}"/>
+            <Button
+                Text="Obtener Ubicación"
+                IsVisible="{Binding visible}"
+                Command="{Binding GetLocationCommand}"/>
+            <Entry 
+                x:Name="txtDestino"
+                Placeholder="Destino" 
+                IsEnabled="{Binding visible}"
+                Text="{Binding DestinationName}"/>
+            <Label Text="Coordenadas" XAlign="Start" FontSize="Micro"/>
+            <Entry 
+                x:Name="txtDestinationLat"
+                Placeholder="Latitud" 
+                IsEnabled="{Binding visible}"
+                Text="{Binding LatitudeDes}"/>
+            <Entry 
+                x:Name="txtDestinationAlt"
+                Placeholder="Longitud" 
+                IsEnabled="{Binding visible}"
+                Text="{Binding LongitudeDes}"/>
+            <Label Text="INFORMACIÓN DEL VIAJE" XAlign="Center" FontSize="Large"/>
+            <Label Text="Fecha" XAlign="Start" FontSize="Small"/>
+            <DatePicker 
+                x:Name="DatePicker" 
+                IsEnabled="{Binding visible}"
+                Date="{Binding Date}" 
+                Format="yyyy'-'MM'-'dd"></DatePicker>
+            <Label Text="Hora" XAlign="Start" FontSize="Small"/>
+            <TimePicker  
+                x:Name="TimePicker" 
+                IsEnabled="{Binding visible}"
+                Time="{Binding Time}"  />
+            <Label Text="Pasajeros" XAlign="Start" FontSize="Micro"/>
+            <Entry 
+                x:Name="txtPassengers"
+                Placeholder="Pasajeros" 
+                Keyboard="Numeric" 
+                IsEnabled="{Binding visible}"
+                Text="{Binding Passengers}">
+                <Entry.Triggers>
+                    <EventTrigger 
+                        Event="TextChanged">
+                        <triggers:PassengersTrigger/>
+                    </EventTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Stepper
+                 x:Name="stpPassengers"
+                Increment="1"
+                Minimum="1"
+                Maximum="20"
+                IsEnabled="{Binding visible}"
+                Value="{Binding Passengers}"/>
+            <Label Text="Precio" XAlign="Start" FontSize="Micro"/>
+            <Entry 
+                 x:Name="txtPrice"
+                Placeholder="Precio" 
+                Keyboard="Numeric" 
+                IsEnabled="{Binding visible}"
+                Text="{Binding Price}">
+                <Entry.Triggers>
+                    <EventTrigger 
+                        Event="TextChanged">
+                        <triggers:PriceTrigger/>
+                    </EventTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Stepper
+                 x:Name="stpPrice"
+                Increment="1"
+                Minimum="1"
+                IsEnabled="{Binding visible}"
+                Value="{Binding Price}"/>            
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
